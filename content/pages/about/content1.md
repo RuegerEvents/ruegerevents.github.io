@@ -1,6 +1,6 @@
 ---
 title: 'Kompetente Partner'
-date: 2018-12-06T09:29:16+10:00
+date: 2023-06-03T11:28:23.654Z
 weight: 1
 background: ''
 button: 'Mehr erfahren'

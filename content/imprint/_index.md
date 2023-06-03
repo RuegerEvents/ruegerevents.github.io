@@ -1,6 +1,6 @@
 ---
 title: 'Impressum'
-date: 2018-02-22T17:01:34+07:00
+date: 2023-06-03T11:28:23.654Z
 ---
 
 Angaben gemäß § 5 TMG

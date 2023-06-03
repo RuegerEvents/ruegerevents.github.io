@@ -1,6 +1,6 @@
 ---
 title: 'Über uns'
-date: 2018-12-06T09:29:16+10:00
+date: 2023-06-03T11:28:23.654Z
 layout: 'about'
 heroHeading: 'Über uns'
 heroSubHeading: "Wir sind ein junges, dynamisches Team mit Lust auf Veranstaltungen aller Art. Sprechen Sie uns an, wir freuen uns auf Sie!"

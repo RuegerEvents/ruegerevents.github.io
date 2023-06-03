@@ -1,6 +1,6 @@
 ---
 title: 'typecast'
-date: 2018-11-18T12:33:46+10:00
+date: 2023-06-03T11:28:23.654Z
 draft: false
 weight: 4
 image: "partners/typecast.svg"

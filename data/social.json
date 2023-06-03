@@ -1,0 +1,12 @@
+[
+    {
+        "name": "GitHub",
+        "link": "https://github.com/RuegerEvents",
+        "image": "social/github.svg"
+    },
+    {
+        "name": "Email",
+        "link": "mailto:hannes@rueger.events",
+        "image": "social/email.svg"
+    }
+]

@@ -9,6 +9,6 @@ button: 'Zu unseren Partnern'
 buttonLink: 'partners'
 ---
 
-Mit Fixtures von Ignition, Cameo, Eurolite, Stairville sind wir für viele Veranstaltungen gerüstet. Wir bieten auch die Möglichkeit, unseren Technikpool zu erweitern, um auch größere Veranstaltungen zu bedienen.
+Mit Fixtures von Ignition, Cameo, Eurolite und Stairville sind wir für viele Veranstaltungen gerüstet. Wir bieten auch die Möglichkeit, unseren Technikpool zu erweitern, um auch größere Veranstaltungen zu bedienen.
 
 Gerne arbeiten wir mit unserem Partner **Lukas Runge Veranstaltungstechnik** zusammen.

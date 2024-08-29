@@ -1,5 +1,73 @@
 {{ define "title" }}{{ .Site.Title }}{{ end}}
-{{ define "header_css" }}{{ end }}
+
+{{ define "header_css" }}
+<style lang="scss">
+  .landing-quarter {
+    height: 100%;
+    width: 100%;
+
+    .content {
+      margin-top: 4rem;
+      transition: margin 0.5s;
+      max-width: 70%;
+    }
+
+    transition: backdrop-filter 0.5s,
+    -webkit-backdrop-filter 0.5s;
+
+    h1 {
+      font-weight: 900;
+    }
+
+    .show-on-hover {
+      transition: opacity 0.5s;
+      opacity: 0;
+    }
+
+    --blur: 3px;
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+
+    &:hover {
+      .content {
+        margin: 0rem;
+      }
+
+      --blur: 15px;
+
+      .show-on-hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .mt-header {
+    margin-top: 60px;
+  }
+
+  html,
+  body {
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  .mh {
+    min-height: calc(100vh - 60px);
+    overflow-x: hidden;
+  }
+
+  .text-light {
+    p {
+      color: #fff;
+
+      a {
+        color: #fff;
+      }
+    }
+  }
+</style>
+{{ end }}
+
 {{ define "body_classes" }}page-home{{ end }}
 {{ define "header_classes" }}header-transparent{{ end }}
 
@@ -17,45 +85,33 @@
 
 {{ define "main" }}
 
-{{ partial "hero-image-fullscreen.html" (dict "heading" .Params.heroHeading "subheading" .Params.heroSubHeading "content" .)}}
+<div class="row row-cols-1 row-cols-md-2 mt-header h-100 mh flex-grow flex-fill-1">
+  {{ $headless := .Site.GetPage "/homepage" }}
+  {{ $reusablePages := $headless.Resources.ByType "page" }}
+  {{ $reusablePages := sort $reusablePages ".Params.weight" }}
+  {{ range $i,$p :=$reusablePages }}
 
-{{ $headless := .Site.GetPage "/homepage" }}
-{{ $reusablePages := $headless.Resources.ByType "page" }}
-{{ $reusablePages := sort $reusablePages ".Params.weight" }}
-{{ range $i,$p :=$reusablePages }}
-<div id="home" class="strip bg-cover bg-position-top {{if eq .Params.theme "light"}}text-light{{end}}" style="background-image: {{if .Params.backgroundGradient}}linear-gradient(90deg, {{ .Params.backgroundGradient }}), {{end}}url('{{ .Params.background | relURL }}');">
-  <div class="container pt-17 pb-17">
-    <div class="row" style="{{if .Params.backgroundBlur}}backdrop-filter: blur({{.Params.backgroundBlur}});-webkit-backdrop-filter: blur({{.Params.backgroundBlur}});{{end}}">
-      <div class="col-12 col-md-6 {{if (modBool $i 2)}}offset-md-6{{end}}">
-        <h2 class="text-{{if eq .Params.theme "light"}}light{{else}}primary{{end}} text-capitalize">{{ $p.Title }}</h2>
-        <p>{{ $p.Content }}</p>
-        {{ if $p.Params.button }}
-          <a class="button" href="{{ $p.Params.buttonLink | relURL }}">{{ $p.Params.button }}</a>
-        {{ end }}
+  <div class="flex-fill bg-cover bg-position-center {{if eq .Params.theme " light" }}text-light{{end}} h-50 p-0"
+    style="background-image: url('{{ .Params.background | relURL }}');">
+    <div class="container landing-quarter d-flex justify-content-center align-items-center">
+      <div class="row text-center content">
+        <div class="d-flex flex-column">
+          <h1 class="text-{{if eq .Params.theme " light"}}light{{else}}primary{{end}} text-capitalize">{{ $p.Title }}
+          </h1>
+          <div class="show-on-hover">
+            <div class="text-{{if eq .Params.theme " light"}}light{{else}}primary{{end}}">{{ $p.Content }}</div>
+            {{ if $p.Params.button }}
+            <div>
+              <a class="button" href="{{ $p.Params.buttonLink | relURL }}">{{ $p.Params.button }}</a>
+            </div>
+            {{ end }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  {{ end }}
 </div>
-{{ end }}
-
-{{ $services := where (where .Site.RegularPages "Type" "services") ".Params.featured" true }}
-{{if gt (len $services) 0}}
-<div class="container pt-8 pb-8 pb-md-14 pt-md-14">
-  <div class="row justify-content-start">
-    <div class="col-12">
-      <h2 class="text-center mb-3">Our Services</h2>
-    </div>
-    {{ range first 6 (sort $services ".Params.weight") }}
-    <div class="col-12 col-md-4 mb-1">
-      {{ .Render "summary" }}
-    </div>
-    {{ end }}
-    <div class="col-12 text-center">
-      <a class="button button-primary" href="{{ .Site.BaseURL }}services">View All Services</a>
-    </div>
-  </div>
-</div>
-{{end}}
 
 {{ end }}
 

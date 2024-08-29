@@ -1,8 +1,7 @@
 ---
 title: "Ticketing"
 weight: 4
-background: "/images/dts_dark.jpg"
-theme: " light"
+background: "images/kevin-bhagat-461952-unsplash-flipped.jpg"
 button: "Zu Dein-Ticket.Shop"
 buttonLink: "https://about.dein-ticket.shop"
 ---

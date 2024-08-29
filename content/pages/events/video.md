@@ -1,10 +1,10 @@
 ---
-title: 'Video & Streaming'
+title: "Video & Streaming"
 weight: 2
-background: 'images/john-benitez-OJNQhem5St0-unsplash.jpg'
-theme: light
-button: 'Zu unseren Partnern'
-buttonLink: 'partners'
+background: "images/john-benitez-OJNQhem5St0-unsplash.jpg"
+theme: " light"
+button: "Zu unseren Partnern"
+buttonLink: "partners"
 ---
 
 Wir bieten maßgeschneiderte Lösungen für Live-Videoproduktionen und Streaming an. Sei es Content für Videowände oder Livestreaming, wir haben die passende Lösung für Sie.

@@ -45,7 +45,7 @@ weight = 2
 
 [[menu.main]]
 name = "Produktentwicklung"
-url = "/product/"
+url = "/products/"
 weight = 3
 
 [[menu.main]]

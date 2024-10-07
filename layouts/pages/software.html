@@ -1,0 +1,43 @@
+{{ define "header_css" }}{{ end }}
+{{ define "body_classes" }}page-pages-softwarelayout{{ end }}
+{{ define "header_classes" }}{{ end }}
+
+{{ define "main" }}
+{{ partial "hero-image-setheight.html" (dict "background" .Params.heroBackground "heading" .Params.heroHeading "subheading" .Params.heroSubHeading "content" .)}}
+
+
+<div class="container my-4">
+  <div class="row">
+    <div>
+      {{ .Content }}
+    </div>
+  </div>
+</div>
+
+{{ $headless := .Site.GetPage "/pages/software" }}
+{{ $subpages := $headless.Resources.ByType "page" }}
+{{ $subpages := sort $subpages ".Params.weight" }}
+{{ range $i,$p := $subpages }}
+{{ $odd := not (modBool $i 2) }}
+<div class="strip bg-cover bg-position-top bg-overlay"
+  style="background-image: url('{{ $p.Params.background | relURL }}');">
+  <div class="container pb-10 pb-10">
+    <div class="row {{if $odd}}flex-row-reverse{{end}}">
+      <div class="col-12 col-md-6 d-flex justify-content-{{if $odd}}center{{else}}start{{end}} align-items-center">
+        <img src="{{ $p.Params.image | relURL }}" alt="{{ $p.Title }}" class="img-fluid"
+          style="max-width: 75%; max-height: 175px;" />
+      </div>
+      <div class="col-12 col-md-6">
+        <h2 class="text-primary">{{ $p.Title }}</h2>
+        {{ $p.Content }}
+        {{ if $p.Params.button }}
+        <a class="button" href="{{  $p.Params.buttonLink | relURL }}">{{ $p.Params.button }}</a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+
+{{ end }}

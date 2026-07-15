@@ -1,0 +1,52 @@
+.crew-credits {
+  margin-top: 40px;
+
+  h2 {
+    font-family: $font-family-heading;
+    font-size: 1.2rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    padding: 6px 0;
+    border-bottom: 1px solid rgba($black, 0.08);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .crew-role {
+    font-family: $font-family-heading;
+    font-weight: $font-weight-bold;
+    margin-right: 6px;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.crew-thanks {
+  margin-top: 20px;
+  color: #666;
+  font-size: 0.9rem;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.icon-instagram {
+  width: 14px;
+  height: 14px;
+}

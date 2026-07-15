@@ -1,0 +1,8 @@
+{{ $terms := .GetTerms "tags" }}
+{{ with $terms }}
+<div class="tag-pills">
+  {{ range . }}
+  <a class="tag-pill" href="{{ .RelPermalink }}">{{ .Title }}</a>
+  {{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,32 @@
+{{ define "header_css" }}{{ end }}
+{{ define "body_classes" }}page-work-list{{ end }}
+{{ define "header_classes" }}{{ end }}
+
+{{ define "main" }}
+
+{{ $heroURL := "" }}
+{{ with .Params.heroBackground }}
+  {{ $res := $.Resources.Get . }}
+  {{ if $res }}
+    {{ $heroURL = ($res.Fill "1920x800 webp q75").RelPermalink }}
+  {{ else }}
+    {{ $heroURL = . | relURL }}
+  {{ end }}
+{{ end }}
+{{ partial "hero-image-setheight.html" (dict "background" $heroURL "heading" .Params.heroHeading "subheading" .Params.heroSubHeading "content" .)}}
+{{ if .Content }}
+<div class="container pt-6 pt-md-10">
+  <div class="row">
+    <div class="col-12">
+      <div class="page-intro">
+      {{ .Content }}
+    </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+<div class="container pb-6 pt-6 pb-md-10 pt-md-10">
+  {{ partial "work-grid.html" (dict "pages" .Pages.ByWeight) }}
+</div>
+{{ end }}

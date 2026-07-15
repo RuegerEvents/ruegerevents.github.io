@@ -1,14 +1,7 @@
 ---
-title: "Lichttechnik"
+title: "Licht"
 weight: 1
-background: "images/rahul-kukreja-_5MoVxUZxEw-unsplash.jpg"
-backgroundGradient: "#FFFFFF00 0%, #00000099 50%"
-backgroundBlur: 3px
-theme: " light"
-button: "Zu unseren Partnern"
-buttonLink: "partners"
+background: "/events/musical-rebecca/foto-3.webp"
 ---
 
-Mit Fixtures von Ignition, Cameo, Eurolite und Stairville sind wir für viele Veranstaltungen gerüstet. Wir bieten auch die Möglichkeit, unseren Technikpool zu erweitern, um auch größere Veranstaltungen zu bedienen.
-
-Gerne arbeiten wir mit unserem Partner **Lukas Runge Veranstaltungstechnik** zusammen.
+Ob vorprogrammierte Shows per Timecode oder Busking am Pult: Wir haben Erfahrung in der Lichtgestaltung für Konzerte, Bandshows und Musicalproduktionen.

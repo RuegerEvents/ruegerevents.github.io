@@ -1,0 +1,15 @@
+{{ $workSection := .Site.GetPage "/events" }}
+{{ $terms := .Site.Taxonomies.tags.Alphabetical }}
+{{ if gt (len $terms) 0 }}
+<div class="row">
+  <div class="col-12">
+    <div class="tag-filter-bar" data-tag-filter-bar>
+      <a href="{{ .RelPermalink }}" class="tag-pill is-active" data-tag-filter="">Alle</a>
+      {{ range $terms }}
+      <a href="{{ .Page.RelPermalink }}" class="tag-pill" data-tag-filter="{{ .Page.Title }}">{{ .Page.Title }} <span class="tag-count">{{ .Count }}</span></a>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+{{ partial "work-grid.html" (dict "pages" $workSection.Pages.ByDate.Reverse) }}

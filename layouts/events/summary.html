@@ -1,0 +1,24 @@
+{{ $thumbURL := "" }}
+{{ with .Params.thumbnail }}
+  {{ $res := $.Resources.Get . }}
+  {{ if $res }}
+    {{ $thumbURL = ($res.Fill "800x533 webp q80").RelPermalink }}
+  {{ else }}
+    {{ $thumbURL = . | relURL }}
+  {{ end }}
+{{ end }}
+<div class="work work-summary">
+  {{ if $thumbURL }}
+  <div class="work-image">
+    <a href="{{ .RelPermalink }}"><img src="{{ $thumbURL }}" loading="lazy" alt="{{ .Title }}" /></a>
+  </div>
+  {{ end }}
+  <div class="work-content">
+    <h2 class="work-title">
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </h2>
+    <p class="work-date">{{ with .Params.eventDate }}{{ . }}{{ else }}{{ .Date.Format "02.01.2006" }}{{ end }}</p>
+    {{ partial "tag-pills.html" . }}
+    {{ .Content | truncate 120 "..." | plainify }}
+  </div>
+</div>

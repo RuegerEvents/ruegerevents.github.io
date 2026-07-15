@@ -1,0 +1,32 @@
+{{ define "header_css" }}{{ end }}
+{{ define "body_classes" }}page-work-single{{ end }}
+{{ define "header_classes" }}{{ end }}
+
+{{ define "main" }}
+{{ partial "hero-image-setheight.html" (dict "background" "" "heading" .Params.heroHeading "subheading" .Params.heroSubHeading "section" "Software" "content" .)}}
+<div class="container pt-4 pt-md-10 pb-4 pb-md-10">
+  <div class="row justify-content-start">
+    {{ $logoURL := "" }}
+    {{ with .Params.logo }}
+      {{ $res := $.Resources.Get . }}
+      {{ if $res }}
+        {{ $logoURL = $res.RelPermalink }}
+      {{ end }}
+    {{ end }}
+    {{ if $logoURL }}
+    <div class="col-12 col-md-4 d-flex align-items-start justify-content-center">
+      <img src="{{ $logoURL }}" alt="{{ .Title }}" class="img-fluid" style="max-width: 60%;" />
+    </div>
+    {{ end }}
+    <div class="col-12 {{ if $logoURL }}col-md-8{{ else }}col-md-8{{ end }}">
+      <div class="work work-single">
+        {{ with .Params.category }}<p class="work-date">{{ . }}</p>{{ end }}
+        <div class="content">{{ .Content }}</div>
+        {{ with .Params.link }}
+        <a class="button" href="{{ . }}" target="_blank" rel="noopener">{{ $.Params.linkLabel | default "Ansehen" }}</a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

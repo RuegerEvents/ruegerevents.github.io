@@ -1,0 +1,21 @@
+{{ with .Params.crew }}
+<div class="crew-credits">
+  <h2 class="mb-2 text-uppercase">Crew</h2>
+  <ul>
+    {{ range . }}
+    <li>
+      <span class="crew-role">{{ .role }}:</span>
+      {{ range $i, $m := .members }}{{ if $i }} &amp; {{ end }}{{ with $m.instagram }}<a href="https://www.instagram.com/{{ . }}/" target="_blank" rel="noopener">{{ partial "icon-instagram.html" }}{{ $m.name }}</a>{{ else }}{{ $m.name }}{{ end }}{{ end }}
+    </li>
+    {{ end }}
+  </ul>
+</div>
+{{ end }}
+{{ with .Params.thanks }}
+<div class="crew-thanks">
+  <p>
+    Vielen Dank an
+    {{ range $i, $m := . }}{{ if $i }}, {{ end }}{{ with $m.instagram }}<a href="https://www.instagram.com/{{ . }}/" target="_blank" rel="noopener">{{ partial "icon-instagram.html" }}{{ $m.name }}</a>{{ else }}{{ $m.name }}{{ end }}{{ end }}
+  </p>
+</div>
+{{ end }}

@@ -1,7 +1,7 @@
-<div id="hero" class="hero-image hero-image-setheight" style="background-image: url('{{ .background | relURL }}')">
+<div id="hero" class="hero-image hero-image-setheight"{{ with .background }} style="background-image: url('{{ . | relURL }}')"{{ end }}>
   <div class="container ">
     <div class="hero-text">
-      <span class="hero-section">{{ if eq .section "work" }}Kunden{{else}}{{ .section }}{{end}}</span>
+      <span class="hero-section">{{ .section }}</span>
       <h1>{{ .heading }}</h1>
       <p>{{ .subheading }}</p>
     </div>

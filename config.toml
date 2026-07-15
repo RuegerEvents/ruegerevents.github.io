@@ -1,5 +1,5 @@
 baseURL = "https://rueger.events"
-languageCode = "de-de"
+locale = "de-DE"
 title = "Rüger Events | Mehr als nur Veranstaltungstechnik"
 titleShort = "Rüger Events"
 themesDir = "themes"
@@ -9,6 +9,9 @@ theme = "hugo-hero-theme"
 [module.hugoVersion]
 extended = true
 min = "0.92.0"
+
+[taxonomies]
+tag = "tags"
 
 [params]
 google_analytics_id = ""
@@ -49,15 +52,10 @@ url = "/products/"
 weight = 3
 
 [[menu.main]]
-name = "Referenzen"
-url = "/work/"
-weight = 4
-
-[[menu.main]]
 name = "Partner"
 url = "/partners/"
-weight = 5
+weight = 4
 
 [permalinks]
 post = "/:year/:month/:day/:slug/"
-pages = "/:filename/"
+pages = "/:contentbasename/"

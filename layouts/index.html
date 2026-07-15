@@ -5,6 +5,10 @@
   .landing-quarter {
     height: 100%;
     width: 100%;
+    position: relative;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: backdrop-filter, -webkit-backdrop-filter;
 
     .content {
       margin-top: 4rem;
@@ -12,6 +16,7 @@
       max-width: 70%;
     }
 
+    -webkit-transition: -webkit-backdrop-filter 0.5s;
     transition: backdrop-filter 0.5s,
     -webkit-backdrop-filter 0.5s;
 
@@ -25,15 +30,19 @@
     }
 
     --blur: 3px;
+    -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(var(--blur));
     -webkit-backdrop-filter: blur(var(--blur));
 
-    &:hover {
+    &:hover,
+    &:active {
       .content {
         margin: 0rem;
       }
 
       --blur: 15px;
+      -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(15px);
 
       .show-on-hover {
         opacity: 1;
@@ -91,8 +100,8 @@
   {{ $reusablePages := sort $reusablePages ".Params.weight" }}
   {{ range $i,$p :=$reusablePages }}
 
-  <div class="flex-fill bg-cover bg-position-center {{if eq .Params.theme " light" }}text-light{{end}} h-50 p-0"
-    style="background-image: url('{{ .Params.background | relURL }}');">
+  <div class="flex-fill {{if .Params.background}}bg-cover bg-position-center{{else}}strip-primary-gradient{{end}} {{if eq .Params.theme " light" }}text-light{{end}} h-50 p-0"
+    {{if .Params.background}}style="background-image: url('{{ .Params.background | relURL }}');"{{end}}>
     <div class="container landing-quarter d-flex justify-content-center align-items-center">
       <div class="row text-center content">
         <div class="d-flex flex-column">

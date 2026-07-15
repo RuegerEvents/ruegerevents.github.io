@@ -1,0 +1,21 @@
+{{ $logoURL := "" }}
+{{ with .Params.logo }}
+  {{ $res := $.Resources.Get . }}
+  {{ if $res }}
+    {{ $logoURL = $res.RelPermalink }}
+  {{ end }}
+{{ end }}
+<div class="work work-summary">
+  {{ if $logoURL }}
+  <div class="work-image work-image-contain">
+    <a href="{{ .RelPermalink }}"><img src="{{ $logoURL }}" loading="lazy" alt="{{ .Title }}" /></a>
+  </div>
+  {{ end }}
+  <div class="work-content">
+    <h2 class="work-title">
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </h2>
+    {{ with .Params.category }}<p class="work-date">{{ . }}</p>{{ end }}
+    {{ .Content | truncate 120 "..." | plainify }}
+  </div>
+</div>

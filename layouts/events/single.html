@@ -1,0 +1,44 @@
+{{ define "header_css" }}{{ end }}
+{{ define "body_classes" }}page-work-single{{ end }}
+{{ define "header_classes" }}{{ end }}
+
+{{ define "main" }}
+{{ $heroURL := "" }}
+{{ with .Params.heroBackground }}
+  {{ $res := $.Resources.Get . }}
+  {{ if $res }}
+    {{ $heroURL = ($res.Fill "1920x800 webp q75").RelPermalink }}
+  {{ else }}
+    {{ $heroURL = . | relURL }}
+  {{ end }}
+{{ end }}
+{{ partial "hero-image-setheight.html" (dict "background" $heroURL "heading" .Title "subheading" .Params.heroSubHeading "section" "Referenzen" "content" .)}}
+<div class="container pt-4 pt-md-10 pb-4 pb-md-10">
+  <div class="row justify-content-start">
+    <div class="col-12 col-md-8">
+      <div class="work work-single">
+        <p class="work-date">{{ with .Params.eventDate }}{{ . }}{{ else }}{{ .Date.Format "02.01.2006" }}{{ end }}</p>
+        {{ partial "tag-pills.html" . }}
+        <div class="content">{{.Content}}</div>
+        {{ partial "crew-credits.html" . }}
+      </div>
+    </div>
+    {{ if .Params.images }}
+    <div class="col-12 pt-4 pt-md-10">
+      <h2 class="mb-2 text-uppercase">Galerie</h2>
+      <div class="work-gallery">
+        {{ range .Params.images }}
+          {{ $res := $.Resources.Get . }}
+          {{ if $res }}
+            {{ $img := $res.Fill "1200x800 webp q82" }}
+            <div class="work-image item">
+              <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" loading="lazy" alt="{{ $.Title }}" />
+            </div>
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

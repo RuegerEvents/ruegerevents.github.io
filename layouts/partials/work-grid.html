@@ -1,0 +1,7 @@
+<div class="row work-grid" data-work-filter-target>
+  {{ range .pages }}
+  <div class="col-12 col-md-6 mb-2" data-work-card data-tags="{{ if .Params.tags }}{{ delimit .Params.tags "," }}{{ end }}">
+    {{ .Render "summary" }}
+  </div>
+  {{ end }}
+</div>

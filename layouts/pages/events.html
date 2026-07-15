@@ -1,35 +1,71 @@
-{{ define "title" }}{{ .Site.Title }}{{ end}}
+{{ define "title" }}Veranstaltungstechnik - {{ .Site.Title }}{{ end}}
 {{ define "header_css" }}{{ end }}
-{{ define "body_classes" }}page-home{{ end }}
-{{ define "header_classes" }}header-transparent{{ end }}
-
-{{ define "meta_tags" }}
-<meta name="description" content="{{ .Site.Params.homepage_meta_tags.meta_description }}" />
-<meta property="og:title" content="{{ .Site.Params.homepage_meta_tags.meta_og_title }}" />
-<meta property="og:type" content="{{ .Site.Params.homepage_meta_tags.meta_og_type }}" />
-<meta property="og:url" content="{{ .Site.Params.homepage_meta_tags.meta_og_url }}" />
-<meta property="og:image" content="{{ .Site.Params.homepage_meta_tags.meta_og_image }}" />
-<meta property="og:description" content="{{ .Site.Params.homepage_meta_tags.meta_og_description }}" />
-<meta name="twitter:card" content="{{ .Site.Params.homepage_meta_tags.meta_twitter_card }}" />
-<meta name="twitter:site" content="{{ .Site.Params.homepage_meta_tags.meta_twitter_site }}" />
-<meta name="twitter:creator" content="{{ .Site.Params.homepage_meta_tags.meta_twitter_creator }}" />
-{{ end }}
+{{ define "body_classes" }}page-pages-events{{ end }}
+{{ define "header_classes" }}{{ end }}
 
 {{ define "main" }}
 
-{{ partial "hero-image-fullscreen.html" (dict "heading" .Params.heroHeading "subheading" .Params.heroSubHeading "content" .)}}
+{{ $heroURL := "" }}
+{{ with .Params.heroBackground }}
+  {{ $res := $.Resources.Get . }}
+  {{ if $res }}
+    {{ $heroURL = ($res.Fill "1920x800 webp q75").RelPermalink }}
+  {{ else }}
+    {{ $heroURL = . | relURL }}
+  {{ end }}
+{{ end }}
+{{ partial "hero-image-setheight.html" (dict "background" $heroURL "heading" .Params.heroHeading "subheading" .Params.heroSubHeading "content" .)}}
+
+{{ if .Content }}
+<div class="container pt-6 pt-md-10">
+  <div class="row">
+    <div class="col-12">
+      <div class="page-intro">
+        {{ .Content }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
 
 {{ $headless := .Site.GetPage "/pages/events" }}
-{{ $reusablePages := $headless.Resources.ByType "page" }}
-{{ $reusablePages := sort $reusablePages ".Params.weight" }}
-{{ range $i,$p :=$reusablePages }}
-<div id="home" class="strip bg-cover bg-position-top {{if eq .Params.theme " light"}}text-light{{end}}"
-  style="background-image: {{if .Params.backgroundGradient}}linear-gradient(90deg, {{ .Params.backgroundGradient }}), {{end}}url('{{ .Params.background | relURL }}');">
+{{ $subpages := sort ($headless.Resources.ByType "page") ".Params.weight" }}
+{{ $serviceCards := first 3 $subpages }}
+{{ $strips := after 3 $subpages }}
+
+<div class="container pt-8 pb-6 pt-md-10 pb-md-6">
+  <div class="row">
+    {{ range $serviceCards }}
+    <div class="col-12 col-md-4 mb-4">
+      <div class="feature">
+        {{ if .Params.background }}
+        <div class="feature-photo">
+          <img src="{{ .Params.background | relURL }}" loading="lazy" alt="{{ .Title }}" />
+        </div>
+        {{ end }}
+        <h3 class="feature-title text-primary">{{ .Title }}</h3>
+        <div class="feature-content">{{ .Content }}</div>
+        {{ if .Params.button }}
+        <a class="button" href="{{ .Params.buttonLink | relURL }}">{{ .Params.button }}</a>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+
+<div class="container pb-6 pb-md-10">
+  {{ partial "work-portfolio.html" . }}
+</div>
+
+{{ range $i, $p := $strips }}
+<div id="home" class="strip bg-cover bg-position-top {{if eq $p.Params.theme " light"}}text-light{{end}}"
+  style="background-image: {{if $p.Params.backgroundGradient}}linear-gradient(90deg, {{ $p.Params.backgroundGradient }}), {{end}}url('{{ $p.Params.background | relURL }}');">
   <div class="container pt-17 pb-17">
     <div class="row"
-      style="{{if .Params.backgroundBlur}}backdrop-filter: blur({{.Params.backgroundBlur}});-webkit-backdrop-filter: blur({{.Params.backgroundBlur}});{{end}}">
-      <div class="col-12 col-md-6 {{if (modBool $i 2)}}offset-md-6{{end}}">
-        <h2 class="text-{{if eq .Params.theme " light"}}light{{else}}primary{{end}} text-capitalize">{{ $p.Title }}</h2>
+      style="{{if $p.Params.backgroundBlur}}backdrop-filter: blur({{$p.Params.backgroundBlur}});-webkit-backdrop-filter: blur({{$p.Params.backgroundBlur}});{{end}}">
+      <div class="col-12 col-md-6 {{if not (modBool $i 2)}}offset-md-6{{end}}">
+        <h2 class="text-{{if eq $p.Params.theme " light"}}light{{else}}primary{{end}} text-capitalize">{{ $p.Title }}</h2>
         <p>{{ $p.Content }}</p>
         {{ if $p.Params.button }}
         <a class="button" href="{{ $p.Params.buttonLink | relURL }}">{{ $p.Params.button }}</a>
@@ -40,26 +76,13 @@
 </div>
 {{ end }}
 
-{{ $services := where (where .Site.RegularPages "Type" "services") ".Params.featured" true }}
-{{if gt (len $services) 0}}
-<div class="container pt-8 pb-8 pb-md-14 pt-md-14">
-  <div class="row justify-content-start">
-    <div class="col-12">
-      <h2 class="text-center mb-3">Our Services</h2>
-    </div>
-    {{ range first 6 (sort $services ".Params.weight") }}
-    <div class="col-12 col-md-4 mb-1">
-      {{ .Render "summary" }}
-    </div>
-    {{ end }}
-    <div class="col-12 text-center">
-      <a class="button button-primary" href="{{ .Site.BaseURL }}services">View All Services</a>
-    </div>
-  </div>
-</div>
-{{end}}
-
 {{ end }}
 
 {{ define "footer_js" }}
+{{ $work := resources.Get "js/pages/work.js" }}
+{{ if hugo.IsServer }}
+<script type="text/javascript" src="{{ $work.RelPermalink }}"></script>
+{{ else }}
+<script type="text/javascript" src="{{ ($work | minify | fingerprint).RelPermalink }}"></script>
+{{ end }}
 {{ end }}

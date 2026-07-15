@@ -1,7 +1,7 @@
 ---
 title: "Veranstaltungstechnik"
 weight: 1
-background: "/work/rootsman-fyah/01.jpg"
+background: "/events/rootsman-fyah-19-07-2022/01.jpg"
 button: "Mehr"
 theme: " light"
 backgroundBlur: 5px

@@ -5,7 +5,7 @@ eventDate: "03.05. – 04.05.2025"
 draft: false
 heroBackground: "titelbild.webp"
 thumbnail: "titelbild.webp"
-tags: ["Ton", "Licht", "Follow-Spot", "Technische Leitung"]
+tags: ["Ton", "Licht", "Follow-Spot"]
 images: ["titelbild.webp", "foto-2.webp", "foto-3.webp"]
 crew:
     - role: "Licht"
